@@ -15,17 +15,19 @@ class TableBusLinesBusStops extends Migration
     {
         Schema::create('bus_lines_bus_stops', function (Blueprint $table) 
         {
-            $table->integer('id_bus_line');
-            $table->foreign('id_bus_line')->references('id')->on('bus_lines');
-            $table->index('id_bus_line');
-            
-            $table->integer('id_bus_stop');
-            $table->foreign('id_bus_stop')->references('id')->on('bus_stops');
-            $table->index('id_bus_stop');
-            
+            $table->integer('id_bus_line')->unsigned();
+            $table->integer('id_bus_stop')->unsigned();
             $table->smallInteger('order');
             $table->boolean('enabled');
             $table->timestamps();
+        });
+        
+        Schema::table('bus_lines_bus_stops', function($table) {
+            $table->foreign('id_bus_line')->references('id')->on('bus_lines');
+            $table->index('id_bus_line');
+            
+            $table->foreign('id_bus_stop')->references('id')->on('bus_stops');
+            $table->index('id_bus_stop');
         });
     }
 
