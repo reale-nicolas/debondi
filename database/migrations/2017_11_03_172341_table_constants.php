@@ -30,6 +30,6 @@ class TableConstants extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('constants');
     }
 }
