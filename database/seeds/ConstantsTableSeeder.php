@@ -46,7 +46,7 @@ class ConstantsTableSeeder extends Seeder
     private function getConstants()
     {
         $constants = Array(
-            array("name" => "PATH_BUS_PARADAS_FOLDER",        "value" => base_path()."/resources/xmlStops/"),
+            array("name" => "PATH_XML_RESOURCE_FOLDER",        "value" => base_path()."/resources/xml/bus_routes/"),
             array("name" => "PATH_BUS_STOP_FOLDER",           "value" => __DIR__."/resources/xmlBusStop/"),
             array("name" => "CTE_PESO_CAMINO_A_PIE",          "value" => "10"),
             array("name" => "CTE_PESO_CAMBIO_COLECTIVO",      "value" => "10")

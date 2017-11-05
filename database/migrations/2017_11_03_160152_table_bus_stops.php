@@ -18,7 +18,7 @@ class TableBusStops extends Migration
             $table->string('name');
             $table->double('latitude');
             $table->double('longitude');
-            $table->boolean('enabled');
+            $table->boolean('enabled')->default(true);
             $table->timestamps();
         });
     }

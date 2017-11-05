@@ -15,8 +15,8 @@ class TableBusLines extends Migration
     {
         Schema::create('bus_lines', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('number');
-            $table->string('letter', 1);
+            $table->integer('line');
+            $table->string('ramal', 1);
             $table->string('zone');
             $table->text('interest_points')->nullable();
             $table->text('neighborhoods')->nullable();

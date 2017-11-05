@@ -14,13 +14,19 @@ class Constants extends BaseModel
     
     public static function get($constantName)
     {   
-        return static::where('name', $constantName)->first()->attributes;
+        if($res = static::where('name', $constantName))
+        {
+            return $res->first()->attributes;
+        }
+        
+        return null;
     }
     
     public static function getValue($constantName)
     {
-        $result =  Constants::get($constantName);
+        if ($result =  Constants::get($constantName))
+            return $result['value'];
         
-        return $result['value'];
+        return null;
     }
 }

@@ -4668,68 +4668,9 @@
       </Placemark>
     </Folder>
     <Folder>
-      <name>Recorrido 1</name>
-      <Placemark>
-        <name>Recorrido 1A Ida</name>
-        <styleUrl>#line-000000-1200-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.415591,-24.795252,0
-            -65.415124,-24.790957,0
-            -65.414931,-24.787782,0
-            -65.414531,-24.783812,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
-        <name>Recorrido 1A Vuelta</name>
-        <styleUrl>#line-000000-1200-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.412254,-24.782385,0
-            -65.407947,-24.782687,0
-            -65.408054,-24.78633,0
-            -65.406027,-24.787407,0
-            -65.402362,-24.788532,0
-            -65.401987,-24.791239,0
-            -65.399428,-24.795639,0
-            -65.39784,-24.796489,0
-            -65.401627,-24.796806,0
-            -65.40452,-24.795575,0
-            -65.408242,-24.793738,0
-            -65.411834,-24.793448,0
-            -65.41697,-24.793428,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
-        <name>Recorrido 1B</name>
-        <styleUrl>#line-000000-1200-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.413477,-24.794663,0
-            -65.409111,-24.795038,0
-            -65.407067,-24.792983,0
-            -65.406804,-24.789374,0
-            -65.406027,-24.787407,0
-            -65.403757,-24.78446,0
-            -65.407131,-24.783866,0
-            -65.41116,-24.783584,0
-            -65.413392,-24.785225,0
-            -65.413719,-24.788595,0
-            -65.413998,-24.791162,0
-            -65.414341,-24.794838,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-    </Folder>
-    <Folder>
       <name>Recorrido 2</name>
       <Placemark>
-        <name>2A</name>
+        <name>A</name>
         <styleUrl>#line-000000-2000-nodesc</styleUrl>
         <LineString>
           <tessellate>1</tessellate>
@@ -4792,7 +4733,7 @@
         </LineString>
       </Placemark>
       <Placemark>
-        <name>2B</name>
+        <name>B</name>
         <styleUrl>#line-000000-2000-nodesc</styleUrl>
         <LineString>
           <tessellate>1</tessellate>
@@ -4890,7 +4831,7 @@
         </LineString>
       </Placemark>
       <Placemark>
-        <name>2B_Villa-floresta</name>
+        <name>B_Villa-floresta</name>
         <styleUrl>#line-000000-2000-nodesc</styleUrl>
         <LineString>
           <tessellate>1</tessellate>
@@ -4990,7 +4931,7 @@
         </LineString>
       </Placemark>
       <Placemark>
-        <name>2B_Parque-Industrial</name>
+        <name>B_Parque-Industrial</name>
         <styleUrl>#line-000000-2000-nodesc</styleUrl>
         <LineString>
           <tessellate>1</tessellate>
@@ -5110,7 +5051,7 @@
         </LineString>
       </Placemark>
       <Placemark>
-        <name>2C</name>
+        <name>C</name>
         <styleUrl>#line-000000-2000-nodesc</styleUrl>
         <LineString>
           <tessellate>1</tessellate>
@@ -5187,7 +5128,7 @@
         </LineString>
       </Placemark>
       <Placemark>
-        <name>2D</name>
+        <name>D</name>
         <styleUrl>#line-000000-2000-nodesc</styleUrl>
         <LineString>
           <tessellate>1</tessellate>
@@ -5284,7 +5225,7 @@
         </LineString>
       </Placemark>
       <Placemark>
-        <name>2E</name>
+        <name>E</name>
         <styleUrl>#line-000000-2000-nodesc</styleUrl>
         <LineString>
           <tessellate>1</tessellate>
@@ -5359,7 +5300,7 @@
         </LineString>
       </Placemark>
       <Placemark>
-        <name>2F</name>
+        <name>F</name>
         <styleUrl>#line-000000-2000-nodesc</styleUrl>
         <LineString>
           <tessellate>1</tessellate>
@@ -5457,7 +5398,7 @@
         </LineString>
       </Placemark>
       <Placemark>
-        <name>2G</name>
+        <name>G</name>
         <styleUrl>#line-000000-2000-nodesc</styleUrl>
         <LineString>
           <tessellate>1</tessellate>
@@ -5527,551 +5468,6 @@
             -65.372249,-24.798289,0
             -65.372407,-24.796567,0
             -65.372424,-24.79498,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-    </Folder>
-    <Folder>
-      <name>Recorrido 3</name>
-      <Placemark>
-        <name>Recorrido 3A ida</name>
-        <styleUrl>#line-000000-1200-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.417418,-24.780806,0
-            -65.413177,-24.7811,0
-            -65.413327,-24.78447,0
-            -65.413628,-24.787528,0
-            -65.413998,-24.791162,0
-            -65.413477,-24.794663,0
-            -65.409111,-24.795038,0
-            -65.405329,-24.795301,0
-            -65.401332,-24.795632,0
-            -65.39784,-24.796489,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
-        <name>Recorrido 3A Vuelta</name>
-        <styleUrl>#line-000000-1200-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.408254,-24.793812,0
-            -65.411834,-24.793448,0
-            -65.41763,-24.793035,0
-            -65.418099,-24.790773,0
-            -65.417712,-24.787088,0
-            -65.417389,-24.783567,0
-            -65.417878,-24.78063,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
-        <name>Recorrido 3B Ida</name>
-        <styleUrl>#line-000000-1200-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.412785,-24.794283,0
-            -65.41763,-24.793035,0
-            -65.418099,-24.790773,0
-            -65.417712,-24.787088,0
-            -65.417389,-24.783567,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
-        <name>Recorrido 3B Vuelta</name>
-        <styleUrl>#line-000000-1200-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.415983,-24.782977,0
-            -65.413681,-24.784806,0
-            -65.413628,-24.787528,0
-            -65.413998,-24.791162,0
-            -65.414411,-24.795457,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
-        <name>Recorrido 3C ida</name>
-        <styleUrl>#line-000000-1200-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.41396,-24.795793,0
-            -65.415452,-24.793879,0
-            -65.415071,-24.790168,0
-            -65.414813,-24.786613,0
-            -65.414443,-24.782962,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
-        <name>Recorrido 3C vuelta</name>
-        <styleUrl>#line-000000-1200-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.416192,-24.785349,0
-            -65.41382,-24.787091,0
-            -65.409752,-24.787601,0
-            -65.408365,-24.789481,0
-            -65.408687,-24.793002,0
-            -65.409213,-24.796246,0
-            -65.412705,-24.795929,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-    </Folder>
-    <Folder>
-      <name>Recorrido 4</name>
-      <Placemark>
-        <name>Recorrido 4A</name>
-        <styleUrl>#line-000000-1200-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.415548,-24.794926,0
-            -65.415183,-24.791463,0
-            -65.414904,-24.787485,0
-            -65.414531,-24.783812,0
-            -65.413177,-24.7811,0
-            -65.409164,-24.781392,0
-            -65.407754,-24.783618,0
-            -65.408054,-24.78633,0
-            -65.406435,-24.787572,0
-            -65.402496,-24.787689,0
-            -65.401992,-24.791001,0
-            -65.40432,-24.793879,0
-            -65.409648,-24.793758,0
-            -65.414653,-24.793187,0
-            -65.417133,-24.794926,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
-        <name>Recorrido 4B Ida</name>
-        <styleUrl>#line-000000-1200-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.415548,-24.794926,0
-            -65.415183,-24.791463,0
-            -65.414904,-24.787485,0
-            -65.414564,-24.784073,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
-        <name>Recorrido 4B Vuelta</name>
-        <styleUrl>#line-000000-1200-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.412254,-24.782385,0
-            -65.407947,-24.782687,0
-            -65.407974,-24.785663,0
-            -65.406435,-24.787572,0
-            -65.402496,-24.787689,0
-            -65.402164,-24.789783,0
-            -65.400785,-24.79386,0
-            -65.404041,-24.793898,0
-            -65.407745,-24.793829,0
-            -65.412292,-24.793386,0
-            -65.41697,-24.793428,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
-        <name>Recorrido 4C</name>
-        <styleUrl>#line-000000-1200-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.415548,-24.794926,0
-            -65.415183,-24.791463,0
-            -65.414904,-24.787485,0
-            -65.414564,-24.784073,0
-            -65.412254,-24.782385,0
-            -65.407947,-24.782687,0
-            -65.407974,-24.785741,0
-            -65.406435,-24.787572,0
-            -65.402496,-24.787689,0
-            -65.401992,-24.791001,0
-            -65.40432,-24.793879,0
-            -65.409648,-24.793758,0
-            -65.414653,-24.793187,0
-            -65.417133,-24.794926,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-    </Folder>
-    <Folder>
-      <name>Recorrido 5</name>
-      <Placemark>
-        <name>Recorrido 5A vuelta</name>
-        <styleUrl>#line-000000-2000-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.41697,-24.786849,0
-            -65.4166,-24.790027,0
-            -65.415124,-24.790957,0
-            -65.414931,-24.787782,0
-            -65.414683,-24.785187,0
-            -65.411648,-24.784951,0
-            -65.40892,-24.782726,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
-        <name>Recorrido 5A Ida</name>
-        <styleUrl>#line-000000-2000-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.409399,-24.782575,0
-            -65.407866,-24.784889,0
-            -65.408222,-24.788456,0
-            -65.408564,-24.79226,0
-            -65.412292,-24.793386,0
-            -65.417222,-24.793036,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
-        <name>Recorrido 5B ida</name>
-        <styleUrl>#line-000000-2000-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.415439,-24.793473,0
-            -65.415063,-24.789787,0
-            -65.41479,-24.786156,0
-            -65.411648,-24.784951,0
-            -65.409108,-24.784531,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
-        <name>Recorrido 5B vuelta</name>
-        <styleUrl>#line-000000-2000-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.410428,-24.782821,0
-            -65.410763,-24.786053,0
-            -65.408966,-24.787623,0
-            -65.408483,-24.790942,0
-            -65.409648,-24.793758,0
-            -65.414653,-24.793187,0
-            -65.417133,-24.794926,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
-        <name>Recorrido 5C</name>
-        <styleUrl>#line-000000-2000-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.415439,-24.793473,0
-            -65.415063,-24.789787,0
-            -65.414813,-24.786613,0
-            -65.414443,-24.782962,0
-            -65.411868,-24.781192,0
-            -65.408097,-24.781445,0
-            -65.40409,-24.781728,0
-            -65.402952,-24.785215,0
-            -65.402164,-24.789783,0
-            -65.400785,-24.79386,0
-            -65.404041,-24.793898,0
-            -65.407745,-24.793829,0
-            -65.412292,-24.793386,0
-            -65.417222,-24.793036,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-    </Folder>
-    <Folder>
-      <name>Recorrido 6</name>
-      <Placemark>
-        <name>Recorrido 6A</name>
-        <styleUrl>#line-000000-2000-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.416036,-24.783902,0
-            -65.415824,-24.786903,0
-            -65.411629,-24.787634,0
-            -65.407686,-24.787692,0
-            -65.404964,-24.787056,0
-            -65.402362,-24.788532,0
-            -65.401987,-24.791239,0
-            -65.399428,-24.795639,0
-            -65.397906,-24.796453,0
-            -65.401627,-24.796806,0
-            -65.405297,-24.796587,0
-            -65.409213,-24.796246,0
-            -65.41289,-24.795194,0
-            -65.414406,-24.793187,0
-            -65.418232,-24.792016,0
-            -65.417825,-24.788315,0
-            -65.417542,-24.785416,0
-            -65.414234,-24.784755,0
-            -65.411279,-24.784978,0
-            -65.40892,-24.782726,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
-        <name>Recorrido 6B</name>
-        <styleUrl>#line-000000-2000-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.409399,-24.782575,0
-            -65.407866,-24.784889,0
-            -65.408222,-24.788456,0
-            -65.408564,-24.79226,0
-            -65.408236,-24.795106,0
-            -65.403505,-24.795764,0
-            -65.401332,-24.795632,0
-            -65.397929,-24.79515,0
-            -65.403497,-24.793945,0
-            -65.408491,-24.793795,0
-            -65.412067,-24.793394,0
-            -65.41763,-24.793035,0
-            -65.4179,-24.789045,0
-            -65.417522,-24.785185,0
-            -65.41499,-24.784704,0
-            -65.410896,-24.785008,0
-            -65.408985,-24.783425,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
-        <name>Recorriod 6C Ida</name>
-        <styleUrl>#line-000000-2000-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.416036,-24.783902,0
-            -65.415824,-24.786903,0
-            -65.411629,-24.787634,0
-            -65.407686,-24.787692,0
-            -65.404964,-24.787056,0
-            -65.402362,-24.788532,0
-            -65.40218,-24.789725,0
-            -65.402008,-24.791166,0
-            -65.399428,-24.795639,0
-            -65.397906,-24.796453,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
-        <name>Recorriod 6C vuelta</name>
-        <styleUrl>#line-000000-2000-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.405297,-24.796587,0
-            -65.409213,-24.796246,0
-            -65.41289,-24.795194,0
-            -65.414406,-24.793187,0
-            -65.418232,-24.792016,0
-            -65.417825,-24.788315,0
-            -65.417542,-24.785416,0
-            -65.414234,-24.784755,0
-            -65.411279,-24.784978,0
-            -65.40892,-24.782726,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-    </Folder>
-    <Folder>
-      <name>Recorrido 7</name>
-      <Placemark>
-        <name>Recorrido 7A ida</name>
-        <styleUrl>#line-000000-2000-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.41043,-24.783072,0
-            -65.413211,-24.783808,0
-            -65.413661,-24.788129,0
-            -65.413986,-24.791424,0
-            -65.414411,-24.795457,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
-        <name>Recorrido 7A vuelta</name>
-        <styleUrl>#line-000000-2000-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.397929,-24.79515,0
-            -65.400018,-24.792347,0
-            -65.402883,-24.791836,0
-            -65.403497,-24.793945,0
-            -65.408491,-24.793795,0
-            -65.412067,-24.793394,0
-            -65.418059,-24.792978,0
-            -65.4179,-24.789045,0
-            -65.417522,-24.785185,0
-            -65.41499,-24.784704,0
-            -65.410896,-24.785008,0
-            -65.408985,-24.783425,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
-        <name>Recorrido 7B ida</name>
-        <styleUrl>#line-000000-2000-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.41043,-24.783072,0
-            -65.413211,-24.783808,0
-            -65.413661,-24.788129,0
-            -65.413986,-24.791424,0
-            -65.414411,-24.795457,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
-        <name>Recorrido 7B vuelta</name>
-        <styleUrl>#line-000000-2000-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.397929,-24.79515,0
-            -65.400018,-24.792347,0
-            -65.402883,-24.791836,0
-            -65.403497,-24.793945,0
-            -65.408491,-24.793795,0
-            -65.412067,-24.793394,0
-            -65.418059,-24.792978,0
-            -65.4179,-24.789045,0
-            -65.417522,-24.785185,0
-            -65.41499,-24.784704,0
-            -65.410896,-24.785008,0
-            -65.408985,-24.783425,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
-        <name>Recorrdio 7C</name>
-        <styleUrl>#line-000000-2000-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.397929,-24.79515,0
-            -65.400018,-24.792347,0
-            -65.402883,-24.791836,0
-            -65.404041,-24.793898,0
-            -65.407745,-24.793829,0
-            -65.411834,-24.793448,0
-            -65.415741,-24.793117,0
-            -65.418189,-24.791521,0
-            -65.417633,-24.786391,0
-            -65.415476,-24.784672,0
-            -65.413398,-24.785638,0
-            -65.413764,-24.789216,0
-            -65.41425,-24.794198,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
-        <name>Recorrido 7D</name>
-        <styleUrl>#line-000000-2000-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.41286,-24.794859,0
-            -65.415741,-24.793117,0
-            -65.418189,-24.791521,0
-            -65.417633,-24.786391,0
-            -65.417171,-24.781401,0
-            -65.414604,-24.781041,0
-            -65.413166,-24.782785,0
-            -65.413398,-24.785638,0
-            -65.413764,-24.789216,0
-            -65.41425,-24.794198,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
-        <name>Recorrido 7E</name>
-        <styleUrl>#line-000000-2000-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.41286,-24.794859,0
-            -65.415741,-24.793117,0
-            -65.418189,-24.791521,0
-            -65.417712,-24.787088,0
-            -65.41539,-24.786932,0
-            -65.413764,-24.789216,0
-            -65.41425,-24.794198,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-    </Folder>
-    <Folder>
-      <name>Recorrido 8</name>
-      <Placemark>
-        <name>Recorrido 8A</name>
-        <styleUrl>#line-000000-2000-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.397929,-24.79515,0
-            -65.400241,-24.79225,0
-            -65.403811,-24.791473,0
-            -65.40594,-24.793304,0
-            -65.408254,-24.793812,0
-            -65.413579,-24.793222,0
-            -65.416974,-24.793951,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
-        <name>Recorrido 8B</name>
-        <styleUrl>#line-000000-2000-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.415452,-24.793879,0
-            -65.415071,-24.790168,0
-            -65.41382,-24.787091,0
-            -65.409752,-24.787601,0
-            -65.408222,-24.788456,0
-            -65.408687,-24.793002,0
-            -65.413579,-24.793222,0
-            -65.416974,-24.793951,0
-          </coordinates>
-        </LineString>
-      </Placemark>
-      <Placemark>
-        <name>Recorrido 8C</name>
-        <styleUrl>#line-000000-2000-nodesc</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-            -65.415452,-24.793879,0
-            -65.415071,-24.790168,0
-            -65.41382,-24.787091,0
-            -65.409752,-24.787601,0
-            -65.408222,-24.788456,0
-            -65.408687,-24.793002,0
-            -65.413579,-24.793222,0
-            -65.416974,-24.793951,0
           </coordinates>
         </LineString>
       </Placemark>

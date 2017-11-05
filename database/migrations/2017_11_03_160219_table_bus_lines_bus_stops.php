@@ -18,15 +18,23 @@ class TableBusLinesBusStops extends Migration
             $table->integer('id_bus_line')->unsigned();
             $table->integer('id_bus_stop')->unsigned();
             $table->smallInteger('order');
-            $table->boolean('enabled');
+            $table->boolean('enabled')->default(true);
             $table->timestamps();
         });
         
         Schema::table('bus_lines_bus_stops', function($table) {
-            $table->foreign('id_bus_line')->references('id')->on('bus_lines');
+            $table  ->foreign('id_bus_line')
+                    ->references('id') 
+                    ->on('bus_lines')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
             $table->index('id_bus_line');
             
-            $table->foreign('id_bus_stop')->references('id')->on('bus_stops');
+            $table  ->foreign('id_bus_stop')
+                    ->references('id')
+                    ->on('bus_stops')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
             $table->index('id_bus_stop');
         });
     }

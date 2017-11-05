@@ -1,5 +1,7 @@
 <?php
 
+use App\XML\XMLBusStopsParser;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,5 +14,15 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $a =  new XMLBusStopsParser();
+//    $lines = $a->getBusLines();
+//    echo "<pre>";
+//    print_r($lines);
+//    echo "</pre>";
+    
+    $b = $a->getBusStops();
+    echo "<pre>";
+    print_r($b);
+    echo "</pre>";
+//    return view('welcome');
 });
