@@ -8,7 +8,6 @@
 
 namespace App\Repositories;
 
-use App\Models\BusStops;
 /**
  * Description of BusStopsRepository
  *
@@ -25,6 +24,26 @@ class BusStopsRepository extends BaseRepository
     {
         return 'App\Models\BusStops';
     }
+    
+    /**
+     * 
+     * @param float $latitud
+     * @param float $longitud
+     * @return type
+     */
+    public function getBusStopsByLatLng($latitud, $longitud)
+    {
+        $res = $this->model
+            ->where("latitude", $latitud)
+            ->where("longitude", $longitud)
+            ->get()->first();
+        
+        if(count($res)>0)
+            return $res;
+        
+        return false;
+    }
+    
     
     
 //    public function errors() {

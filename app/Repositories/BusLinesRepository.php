@@ -2,6 +2,8 @@
 
 namespace App\Repositories;
 
+use App\Models\BusLines;
+
 /**
  * Description of BusesLineRepository
  *
@@ -14,7 +16,33 @@ class BusLinesRepository extends BaseRepository
     {
         return 'App\Models\BusLines';
     }
-//    
+    
+    /**
+     * 
+     * @param type $line
+     * @param type $ramal
+     * @param type $zone
+     */
+    public function getLines($line, $ramal, $zone = '')
+    {
+            return $this->model
+                ->where("line", $line)
+                ->where("ramal", $ramal)
+                ->where("zone", $zone)
+                ->get()->first();
+    }
+    
+    
+    /**
+     * 
+     * @return type
+     */
+    public function route()
+    {
+        return $this->model->find(1)
+                ->hasMany('App\Models\BusStops');
+    }
+
 //    public function busesLineRoute($busLines) {
 ////        return $busLines->hasMany(BusesLineRoute::class, 'line_id')->get();
 //    }

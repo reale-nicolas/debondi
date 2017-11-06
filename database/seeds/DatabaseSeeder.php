@@ -14,5 +14,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ConstantsTableSeeder::class);
         $this->call(BusStopsTableSeeder::class);
         $this->call(BusLinesTableSeeder::class);
+        $this->call(BusLinesBusStopsTableSeeder::class);
     }
 }

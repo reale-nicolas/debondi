@@ -1,6 +1,5 @@
 <?php
 
-use App\XML\XMLBusStopsParser;
 use Illuminate\Database\Seeder;
 
 class BusLinesTableSeeder extends Seeder
@@ -16,14 +15,16 @@ class BusLinesTableSeeder extends Seeder
         echo "\n\n\n";
         echo "\n Iniciando volcado de datos tabla BUS_LINES...";
         
-        $xmlBusLines   = new XMLBusStopsParser();
+        $xmlBusLines   = new App\XML\XMLBusStopsParser;
         $arrBusLines   = $xmlBusLines->getBusLines();
                 
+        $busLinesRepository = App::make("App\Http\Controllers\BusLinesController");
+        
         foreach ($arrBusLines as $line) {
             
             echo "\n Importando bus line name: ".$line['line'].$line['ramal']."-".$line['zone'];
             
-            $busLinesRepository = App::make("App\Http\Controllers\BusLinesController");
+            
             $res = $busLinesRepository->create($line);
 //            $res = $busLinesRepository->insert($line['line'], $line['ramal'], $line['zone']);
             

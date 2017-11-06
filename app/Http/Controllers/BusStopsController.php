@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Interfaces\RepositoryInterface;
+use App\Repositories\BusStopsRepository;
 
 
 class BusStopsController extends Controller
 {
-    private $busStops;
+    private $busStopsRepository;
     
-    public function __construct(RepositoryInterface $busStops) 
+    public function __construct(BusStopsRepository $busStopsRepository) 
     {
-        $this->busStops = $busStops;
+        $this->busStopsRepository = $busStopsRepository;
     }
     
     public function create($data)
     {
-        return $this->busStops->create($data);
+        return $this->busStopsRepository->create($data);
     }
 }
