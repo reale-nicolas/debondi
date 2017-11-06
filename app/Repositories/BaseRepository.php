@@ -21,6 +21,10 @@ abstract class BaseRepository implements RepositoryInterface
      */
     protected $model;
 
+    
+    public function model(){
+        return $this->model;
+    }
     /**
      * @param App $app
      * @throws \Bosnadev\Repositories\Exceptions\RepositoryException
@@ -29,10 +33,6 @@ abstract class BaseRepository implements RepositoryInterface
         $this->app = $app;
         $this->makeModel();
     }
-//    public function __construct() {
-//        
-//        $this->model = $this->getModel();
-//    }
     
     
     /**
@@ -52,7 +52,7 @@ abstract class BaseRepository implements RepositoryInterface
         $model = $this->app->make($this->getModel());
 
         if (!$model instanceof Model)
-            throw new RepositoryException("Class {$this->getModel()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
+            throw new Exception("Class {$this->getModel()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
 
         return $this->model = $model;
     }
@@ -117,7 +117,7 @@ abstract class BaseRepository implements RepositoryInterface
      * @return mixed
      */
     public function findBy($attribute, $value, $columns = array('*')) {
-        return $this->model->where($attribute, '=', $value)->first($columns);
+        return $this->model->where($attribute, '=', $value)->get($columns);
     }
     
 }

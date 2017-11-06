@@ -1,6 +1,6 @@
 <?php
 
-use App\XML\XMLBusStopsParser;
+//use App\XML\XMLBusStopsParser;
 use Illuminate\Database\Seeder;
 
 class BusStopsTableSeeder extends Seeder
@@ -17,18 +17,17 @@ class BusStopsTableSeeder extends Seeder
         echo "\n\n\n";
         echo "\n Iniciando volcado de datos tabla BUS_STOPS...";
         
-        $xmlBusStop   = new XMLBusStopsParser();
-        $arrBusStop         = $xmlBusStop->getBusStops();
+        $xmlBusStop   = new App\XML\XMLBusStopsParser;
+        $arrBusStop   = $xmlBusStop->getBusStops();
                 
+        $busStopsRepository = App::make("App\Http\Controllers\BusStopsController");
+        
         $orden = 0;
         foreach ($arrBusStop as $stop) {
             
             echo "\n Importando Stop Nro: ".$orden." - Name: ".$stop['name'];
             
-            
-            $busStopsRepository = App::make("App\Http\Controllers\BusStopsController");
             $res = $busStopsRepository->create($stop);
-//            $res = $busStopsRepository->insert($stop['name'], $stop['latitude'], $stop['longitude']);
             
             if (!$res) {
                 $error = true;

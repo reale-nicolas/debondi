@@ -12,17 +12,16 @@ use App\XML\XMLBusStopsParser;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get("/seeder", "BusLinesController@getAll");
 
 Route::get('/', function () {
-    $a =  new XMLBusStopsParser();
-//    $lines = $a->getBusLines();
-//    echo "<pre>";
-//    print_r($lines);
-//    echo "</pre>";
     
-    $b = $a->getBusStops();
+                
+    $busStops = App::make("App\Http\Controllers\BusLinesController");
+//    App::make("App\Repositories\BusLStopsRepository");
+    $a = $busStops->getAllLines();
+    
     echo "<pre>";
-    print_r($b);
+    print_r($a);
     echo "</pre>";
-//    return view('welcome');
 });
