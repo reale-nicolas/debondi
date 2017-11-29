@@ -111,13 +111,19 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
-     * @param $attribute
-     * @param $value
+     * @param array $attribute
+     * @param array $value
      * @param array $columns
+     * 
      * @return mixed
      */
     public function findBy($attribute, $value, $columns = array('*')) {
-        return $this->model->where($attribute, '=', $value)->get($columns);
+        $repo = $this->model;
+        foreach ($attribute as $k => $name) 
+        {
+            $repo = $repo->where($name, $value[$name]);
+        }
+        return $repo->get();
     }
     
 }

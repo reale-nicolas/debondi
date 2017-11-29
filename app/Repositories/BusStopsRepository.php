@@ -8,6 +8,9 @@
 
 namespace App\Repositories;
 
+use Illuminate\Container\Container;
+use Illuminate\Support\Facades\DB;
+
 /**
  * Description of BusStopsRepository
  *
@@ -15,7 +18,7 @@ namespace App\Repositories;
  */
 class BusStopsRepository extends BaseRepository
 {
-    public function __construct(\Illuminate\Container\Container $app) {
+    public function __construct(Container $app) {
         parent::__construct($app);
     }
 
@@ -25,43 +28,41 @@ class BusStopsRepository extends BaseRepository
         return 'App\Models\BusStops';
     }
     
-    /**
-     * 
-     * @param float $latitud
-     * @param float $longitud
-     * @return type
-     */
-    public function getBusStopsByLatLng($latitud, $longitud)
+    
+       
+    public function getBusStopsNearby($latitude, $longitude, $radio)
     {
+        $query = "(DEGREES(
+                    ACOS(
+                          (
+                            SIN(
+                                RADIANS(".$latitude.")
+                            ) * SIN(
+                                RADIANS(latitude)
+                            )
+                          ) + 
+                          (
+                            COS(
+                                RADIANS($latitude)
+                            ) * COS(
+                                RADIANS(latitude)
+                            ) * COS(
+                                RADIANS($longitude-longitude)
+                            )
+                          )
+                        )
+                    ) * 111.13384 * 1000)";
+        
         $res = $this->model
-            ->where("latitude", $latitud)
-            ->where("longitude", $longitud)
-            ->get()->first();
+            ->select(DB::raw('*, '.$query.' as distance'))
+            ->whereRaw($query. " <= ".$radio)
+            ->orderByRaw('distance ASC')
+            ->get();
         
-        if(count($res)>0)
-            return $res;
-        
-        return false;
+        return $res;
     }
     
     
-    
-//    public function errors() {
-//        ;
-//    }    
-//    
-//    public function all(array $related = null) {
-//        return $this->getModel()->all();
-//    }
-//    
-//    public function get($id, array $related = null) {
-//        ;
-//    }
-//    
-//    public function getWhere($column, $value, array $related = null) {
-//        ;
-//    }
-//    
 //    public function insert($name, $latitude, $longitude, $enabled = true){}
 //    public function insert1($data)
 //    {
