@@ -32,34 +32,37 @@ class BusStopsRepository extends BaseRepository
        
     public function getBusStopsNearby($latitude, $longitude, $radio)
     {
-        $query = "(DEGREES(
-                    ACOS(
-                          (
-                            SIN(
-                                RADIANS(".$latitude.")
-                            ) * SIN(
-                                RADIANS(latitude)
-                            )
-                          ) + 
-                          (
-                            COS(
-                                RADIANS($latitude)
-                            ) * COS(
-                                RADIANS(latitude)
-                            ) * COS(
-                                RADIANS($longitude-longitude)
-                            )
-                          )
-                        )
-                    ) * 111.13384 * 1000)";
+        $result = DB::select('call get_route_sp(?,?,?)', array($latitude, $longitude, $radio)); 
         
-        $res = $this->model
-            ->select(DB::raw('*, '.$query.' as distance'))
-            ->whereRaw($query. " <= ".$radio)
-            ->orderByRaw('distance ASC')
-            ->get();
-        
-        return $res;
+        return $result;
+//        $query = "(DEGREES(
+//                    ACOS(
+//                          (
+//                            SIN(
+//                                RADIANS(".$latitude.")
+//                            ) * SIN(
+//                                RADIANS(latitude)
+//                            )
+//                          ) + 
+//                          (
+//                            COS(
+//                                RADIANS($latitude)
+//                            ) * COS(
+//                                RADIANS(latitude)
+//                            ) * COS(
+//                                RADIANS($longitude-longitude)
+//                            )
+//                          )
+//                        )
+//                    ) * 111.13384 * 1000)";
+//        
+//        $res = $this->model
+//            ->select(DB::raw('*, '.$query.' as distance'))
+//            ->whereRaw($query. " <= ".$radio)
+//            ->orderByRaw('distance ASC')
+//            ->get();
+//        
+//        return $res;
     }
     
     
