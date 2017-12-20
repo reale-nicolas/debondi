@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\AStar\AStarServices;
 use App\Services\BusService;
-use Validator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Validator;
 use function response;
 
 
 class BusLinesController extends Controller
 {
     protected $busService;
+    protected $aStarService;
+    
     protected $availableFieldsToSearchByForLines = [
        "line", "ramal", "zone"
     ];
@@ -19,9 +22,10 @@ class BusLinesController extends Controller
        "name", "latitude", "longitude"
     ];
     
-    public function __construct(BusService $busService) 
+    public function __construct(BusService $busService, AStarServices $aStar) 
     {
         $this->busService = $busService;
+        $this->aStarService = $aStar;
     }
     
     
@@ -179,48 +183,48 @@ class BusLinesController extends Controller
     
     public function getBusStopsNearby(Request $request)
     {
-        if ($request->all()) 
-        {
-            $validator = Validator::make($request->all(), [
-                'latitude'   => 'required|numeric',
-                'longitude'  => 'required|numeric',
-                'radio'      => 'required|integer'
-            ]);
-
-            if ($validator->fails())
-            {
-                return response()->json([
-                    'result'    => 'ERROR',
-                    'detail'    => 'Differents errors were found in the input data',
-                    'fields'    => $validator->errors()
-                ]);
-            }
+//        if ($request->all()) 
+//        {
+//            $validator = Validator::make($request->all(), [
+//                'latitude'   => 'required|numeric',
+//                'longitude'  => 'required|numeric',
+//                'radio'      => 'required|integer'
+//            ]);
+//
+//            if ($validator->fails())
+//            {
+//                return response()->json([
+//                    'result'    => 'ERROR',
+//                    'detail'    => 'Differents errors were found in the input data',
+//                    'fields'    => $validator->errors()
+//                ]);
+//            }
         
-            $result = $this->busService->getBusStopsNearby($request->latitude, $request->longitude, $request->radio);
-
-            if (!$result->count()) 
-            {
-                return response()->json([
-                    'result'    => 'SUCCESS',
-                    'detail'    => 'We couldn\'t find records with your criteria',
-                    'dataset'   => '0',
-                    'data'      => null
-                ]);
-            }
-
-            return response()->json([
-                'result'    => 'SUCCESS',
-                'detail'    => '',
-                'dataset'   => $result->count(),
-                'data'      => $result
-            ]);
-            
-        }
-        
-        return response()->json([
-            'result'    => 'ERROR',
-            'detail'    => 'You have to provide differents input data.'
-        ]);
+            $result = $this->aStarService->getBusStopsNearby($request->latitude, $request->longitude, $request->radio);
+            var_dump($result);
+//            if (!$result->count()) 
+//            {
+//                return response()->json([
+//                    'result'    => 'SUCCESS',
+//                    'detail'    => 'We couldn\'t find records with your criteria',
+//                    'dataset'   => '0',
+//                    'data'      => null
+//                ]);
+//            }
+//
+//            return response()->json([
+//                'result'    => 'SUCCESS',
+//                'detail'    => '',
+//                'dataset'   => $result->count(),
+//                'data'      => $result
+//            ]);
+//            
+//        }
+//        
+//        return response()->json([
+//            'result'    => 'ERROR',
+//            'detail'    => 'You have to provide differents input data.'
+//        ]);
     }
     
     

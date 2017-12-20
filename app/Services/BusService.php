@@ -21,13 +21,33 @@ class BusService extends BaseService
         $this->busStopRepository = $busStop;
     }
   
-    
+
     public function getRoute($latFrom, $lngFrom, $latTo, $lngTo, $maxDistance = 800)
     {
+        $distance = distanceBetweenTerrainPoints($latFrom, $lngFrom, $latTo, $lngTo, "m");
+        if ($distance <= $maxDistance)
+        {
+            echo "Vaya caminando señor!!! Solo son: ".$distance;
+            exit;
+        }
+        
         $stopsNearOrigin = $this->busStopRepository->getBusStopsNearby($latFrom, $lngFrom, $maxDistance);
+  
+        foreach ($stopsNearOrigin as $stop)
+        {
+            $stop->stopsOptions = $this->busStopRepository->getBusStopsNearby($latTo, $lngTo, $maxDistance-$stop->distance);
+            $stop->lines = $stop->lines;
+            
+            foreach ($stop->stopsOptions as $stopDestination)
+            {
+                $stopDestination->lines = $stopDestination->lines;
+            }
+        }
+        
+        return ($stopsNearOrigin);
     }
-    
-    
+
+//debondi.app/api/route/?latFrom=-24.8092086&lngFrom=-65.38786479999999&latTo=-24.788584&lngTo=-65.4122110&maxDistance=1000    
 
     public function getBusStopsNearby($latitude, $longitude, $radio=100)
     {
