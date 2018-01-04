@@ -20,7 +20,7 @@ class BusStopsTableSeeder extends Seeder
         $xmlBusStop   = new App\XML\XMLBusStopsParser;
         $arrBusStop   = $xmlBusStop->getBusStops();
                 
-        $busStopsRepository = App::make("App\Http\Controllers\BusStopsController");
+        $busStopsRepository = App::make("App\Repositories\BusStopsRepository");
         
         $orden = 0;
         foreach ($arrBusStop as $stop) {

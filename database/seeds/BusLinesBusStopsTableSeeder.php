@@ -23,7 +23,7 @@ class BusLinesBusStopsTableSeeder extends Seeder
         $busLinesRepository = App::make("App\Repositories\BusLinesRepository");
         
         $busStopsAll = $busStopsRepository->all();
-        $busLinesBusStopsRepository = App::make("App\Http\Controllers\BusLinesBusStopsController");
+        $busLinesBusStopsRepository = App::make("App\Repositories\BusLinesBusStopsRepository");
         
         foreach ($arrBusLines as $line) 
         {
@@ -32,8 +32,12 @@ class BusLinesBusStopsTableSeeder extends Seeder
             echo "\n\n\n\nLinea: ".$line['line']." - Ramal: ".$line['ramal']." - Zone: ".$line['zone'];
             
             //Buscamos la linea de colectivo obtenida del XML en la base de datos para obtener su ID.
-            $dbBusLine = $busLinesRepository->getLines($line['line'], $line['ramal'], $line['zone']);
-            $idLine = $dbBusLine->id;
+//            $dbBusLine = $busLinesRepository->getLines($line['line'], $line['ramal'], $line['zone']);
+            $dbBusLine = $busLinesRepository->findBy(
+                    ['line','ramal','zone'],
+                    ['line' => $line['line'], 'ramal' => $line['ramal'], 'zone' => $line['zone']]);
+            
+            $idLine = $dbBusLine[0]->id;
             
             //Obtenemos la ruta de la linea de colectivos del XML
             $arrBusStops   = $xmlBusLines->getBusRouteStops($line['line'], $line['ramal'], $line['zone']);
@@ -41,14 +45,17 @@ class BusLinesBusStopsTableSeeder extends Seeder
             {
                 if (is_numeric($k)) 
                 {
-//                    echo "\n ";
-                    $dbBusStop = $busStopsRepository->getBusStopsByLatLng($busStop['latitude'], $busStop['longitude']);
+                    echo "\n Latitude:".$busStop['latitude']." - Longiutde: ".$busStop['longitude'];
+//                    $dbBusStop = $busStopsRepository->getBusStopsByLatLng($busStop['latitude'], $busStop['longitude']);
+                    $dbBusStop = $busStopsRepository->findBy(
+                            ['latitude', 'longitude'],
+                            ['latitude'=>$busStop['latitude'], 'longitude'=>$busStop['longitude']]);
                     
-                    if ($dbBusStop)
+                    if ($dbBusStop->count() > 0)
                     {
-                        $idStop = (isset($dbBusStop->id)? $dbBusStop->id : null);
+                        $idStop = (isset($dbBusStop[0]->id)? $dbBusStop[0]->id : null);
 
-//                        echo "\n Id Line: ".$idLine." - Id Stop: ".$idStop." - Count: ".$dbBusStop;
+                        echo "\n Id Line: ".$idLine." - Id Stop: ".$idStop." - Count: ".$dbBusStop->count();
                         $founded++;
                         
                     } else {
@@ -62,9 +69,12 @@ class BusLinesBusStopsTableSeeder extends Seeder
 //                        echo "\n Xml Coords: (".$arrDistancias[1].",".$arrDistancias[2].")";
 //                        echo "\n DB  Coords: (".$busStop['latitude'].",".$busStop['longitude'].")";
                         
-                        $dbBusStop = $busStopsRepository->getBusStopsByLatLng($arrDistancias[1], $arrDistancias[2]);
+//                        $dbBusStop = $busStopsRepository->getBusStopsByLatLng($arrDistancias[1], $arrDistancias[2]);
+                        $dbBusStop = $busStopsRepository->findBy(
+                                ['latitude', 'longitude'],
+                                ['latitude'=>$arrDistancias[1], 'longitude'=>$arrDistancias[2]]);
                         if ($dbBusStop) 
-                            $idStop = (isset($dbBusStop->id)? $dbBusStop->id : null);
+                            $idStop = (isset($dbBusStop[0]->id)? $dbBusStop[0]->id : null);
                     }
                     $order =$busStop['order'];
                     
