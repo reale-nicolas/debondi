@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\BusLines;
+use Illuminate\Container\Container;
 
 /**
  * Description of BusesLineRepository
@@ -11,6 +11,11 @@ use App\Models\BusLines;
  */
 class BusLinesRepository extends BaseRepository
 {
+    
+    public function __construct(Container $app) {
+        parent::__construct($app);
+    }
+    
     
     public function getModel() 
     {

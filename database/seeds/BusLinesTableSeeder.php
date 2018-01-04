@@ -18,7 +18,7 @@ class BusLinesTableSeeder extends Seeder
         $xmlBusLines   = new App\XML\XMLBusStopsParser;
         $arrBusLines   = $xmlBusLines->getBusLines();
                 
-        $busLinesRepository = App::make("App\Http\Controllers\BusLinesController");
+        $busLinesRepository = App::make("App\Repositories\BusLinesRepository");
         
         foreach ($arrBusLines as $line) {
             
