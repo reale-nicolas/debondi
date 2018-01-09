@@ -48,6 +48,13 @@ use Illuminate\Http\Request;
         //www.example.com/api/lines?
         Route::get("",      "BusLinesController@getStops");
     });
+    
+    
+    Route::prefix('contacts')->group(function () 
+    {
+        //www.example.com/api/contacts
+        Route::post("",  "ContactsController@create");
+    });
         
         
         
