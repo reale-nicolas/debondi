@@ -71,7 +71,7 @@ BEGIN
 
 
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET b = 1;
-    DECLARE CONTINUE HANDLER FOR NOT FOUND SET c = 1;
+--     DECLARE CONTINUE HANDLER FOR NOT FOUND SET c = 1;
     
     DROP TEMPORARY TABLE IF EXISTS temporary_table;
     CREATE TEMPORARY TABLE IF NOT EXISTS temporary_table (id_stop int, id_line int, stop_order int, distance decimal(6,2));
@@ -168,11 +168,16 @@ BEGIN
         WHILE b = 0 DO
 
             OPEN stopsNearDestiny;            
-                FETCH stopsNearDestiny INTO v_id_stop_destiny, v_id_line_destiny, v_order_destiny, v_distance_destiny;
-                SET c = 0;
+                
+--                 SET c = 0;
 
-                WHILE c = 0 DO
-
+--                 WHILE c = 0 DO
+                read_loop: LOOP
+                    FETCH stopsNearDestiny INTO v_id_stop_destiny, v_id_line_destiny, v_order_destiny, v_distance_destiny;
+                    IF b THEN
+                        SET b = 0;
+                        LEAVE read_loop;
+                    END IF;
                     -- Iteramos sobre la columna 'v_id_line_destiny' y 'v_order_destiny' mientras exista mas de un registro por columna
                     -- separados por comma ','
                     WHILE (LOCATE(',', v_id_line_destiny) > 0) DO
@@ -229,7 +234,8 @@ BEGIN
                         END IF;
 
                     END WHILE;
-                END WHILE;
+--                 END WHILE;
+                END LOOP;   
             CLOSE stopsNearDestiny;
         END WHILE;
             

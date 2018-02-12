@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+//use Symfony\Component\HttpFoundation\Request;
+
 
 use App\Services\ContactsService;
-use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Http\Request;
 use Validator;
 use function response;
 
@@ -20,13 +22,13 @@ class ContactsController extends Controller
     
     public function create(Request $request)
     {
-//        echo "<pre>";print_r($request->all());echo "</pre>";
+        
         if ($request->all()) 
         {
             $validator = Validator::make($request->all(), [
-                'subject'       => 'required|string',
-                'message'       => 'required|string',
-                'email'         => 'email',
+                'email'         => 'email|max:50',
+                'subject'       => 'required|string|max:255',
+                'message'       => 'required|string|max:255'
             ]);
 
             if ($validator->fails())
@@ -38,18 +40,21 @@ class ContactsController extends Controller
                 ]);
             }
         
-            $result = $this->contactService->create(
-                    $request->subject, 
-                    $request->message,
-                    $request->email
-            );
-
+            $result = $this->contactService->create($request);
             
-            return response()->json([
-                'result'    => 'SUCCESS',
-                'detail'    => '',
-                'data'      => ''
-            ]);
+            if ($result) {
+                return response()->json([
+                    'result'    => 'SUCCESS',
+                    'detail'    => 'It was imposible to register a new record.',
+                    'data'      => ''
+                ]);
+            } else {
+                return response()->json([
+                    'result'    => 'ERROR',
+                    'detail'    => '',
+                    'data'      => ''
+                ]);
+            }
             
         }
         

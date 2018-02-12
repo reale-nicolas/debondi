@@ -6,5 +6,14 @@ namespace App\Models;
 class Contacts extends BaseModel
 {
    
-    protected $collection = 'contacts';
+    protected $table = 'contacts';
+    
+    protected $fillable = [
+        'subject',
+        'email',
+        'message'
+    ];
+    
+    public $timestamps = false;
+    
 }

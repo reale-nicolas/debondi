@@ -4,20 +4,29 @@ function sendContactsFormAjax(subject, message, email)
     {
         url: "http://debondi.test/api/contacts/",
         type: 'POST',
-        data: {subject: subject, message: message, email:email},
+        data: {email:email, subject: subject, message: message},
         beforeSend: function() {
             $("#btnSubmitContactsForm").toggleClass("w3-hide");
             $("#btnLoadingContactsForm").toggleClass("w3-hide");
         },
         success: function (response) 
         {
-            $("#formContact").trigger("reset");
-            $.notify("Mensaje enviado satisfactoriamente", 
-            { 
-                globalPosition:"top right", 
-                className: "success"
-            });
-            $('#divContactenosForm').hide();
+            if (response.result === 'SUCCESS')
+            {
+                $("#formContact").trigger("reset");
+                $.notify("Mensaje enviado satisfactoriamente", 
+                { 
+                    globalPosition:"top right", 
+                    className: "success"
+                });
+                $('#divContactenosForm').hide();
+            } else {
+                $.notify("Hubo un error al intentar guardar los datos, por favor intente nuevamente.", 
+                {
+                    globalPosition:"top right", 
+                    className: "error"
+                });
+            }
         },
         complete: function() {
             $("#btnSubmitContactsForm").toggleClass("w3-hide");

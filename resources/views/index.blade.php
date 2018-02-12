@@ -271,7 +271,7 @@
                         </div>
                         
                         <div class="input-group w3-margin-bottom">
-                            <input type="email" id="txtEmail" name="txtEmail" class="w3-input w3-border" placeholder="Tu E-mail">
+                            <input type="text" id="txtEmail" name="txtEmail" class="w3-input w3-border" placeholder="Tu E-mail">
                         </div>
                         
                         <div class="input-group w3-margin-bottom">
@@ -343,6 +343,7 @@
                         required: true
                     },
                     txtEmail: {
+                        required: true,
                         email: true
                     },
                     txtMessage: {

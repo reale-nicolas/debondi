@@ -30,9 +30,9 @@ class BusStopsRepository extends BaseRepository
     
     
        
-    public function getBusStopsNearby($latitude, $longitude, $radio)
+    public function getBusStopsNearby($latitude, $longitude, $latitude1, $longitude1, $radio)
     {
-        $result = DB::select('call get_route_sp(?,?,?)', array($latitude, $longitude, $radio)); 
+        $result = DB::select('call get_route_sp(?,?,?,?,?)', array($latitude, $longitude, $latitude1, $longitude1, $radio)); 
         
         return $result;
 //        $query = "(DEGREES(

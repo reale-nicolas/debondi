@@ -25,13 +25,13 @@ class ContactsService extends BaseService
         $this->contactsRepository = $contact;
     }
     
-    public function create($subject, $message, $email)
+    public function create($data)
     {
         return $this->contactsRepository->create(
             array(
-                "subject"   => $subject, 
-                "message"   => $message,
-                "email"     => $email
+                "message"   => $data->message,
+                "subject"   => $data->subject, 
+                "email"     => $data->email
             )
         );   
     }

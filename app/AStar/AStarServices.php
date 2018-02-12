@@ -24,7 +24,10 @@ class AStarServices
     
     public function getBusStopsNearby()
     {
-        return $this->stopsDB->getBusStopsNearby('-24.8092086','-65.38786479', '800');
+        return $this->stopsDB->getBusStopsNearby(
+                '-24.8092086','-65.38786479', 
+                '-24.781131', -'65.417450',
+                '800');
     }
     
 }
