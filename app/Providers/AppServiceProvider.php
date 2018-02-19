@@ -33,26 +33,26 @@ class AppServiceProvider extends ServiceProvider
         });
         
         
-        $this->app
-            ->when('App\Http\Controllers\BusStopsController')
-            ->needs('App\Interfaces\RepositoryInterface')
-            ->give(function () {
-                return new BusStopsRepository($this->app);
-        });
-        
-        $this->app
-            ->when('App\Http\Controllers\BusLinesController')
-            ->needs('App\Interfaces\RepositoryInterface')
-            ->give(function () {
-                return new BusLinesRepository($this->app);
-        });
-        
-        $this->app
-            ->when('App\Http\Controllers\BusLinesBusStopsController')
-            ->needs('App\Interfaces\RepositoryInterface')
-            ->give(function () {
-                return new BusLinesBusStopsRepository($this->app);
-        });
+//        $this->app
+//            ->when('App\Http\Controllers\BusStopsController')
+//            ->needs('App\Interfaces\RepositoryInterface')
+//            ->give(function () {
+//                return new BusStopsRepository($this->app);
+//        });
+//        
+//        $this->app
+//            ->when('App\Http\Controllers\BusLinesController')
+//            ->needs('App\Interfaces\RepositoryInterface')
+//            ->give(function () {
+//                return new BusLinesRepository($this->app);
+//        });
+//        
+//        $this->app
+//            ->when('App\Http\Controllers\BusLinesBusStopsController')
+//            ->needs('App\Interfaces\RepositoryInterface')
+//            ->give(function () {
+//                return new BusLinesBusStopsRepository($this->app);
+//        });
         
     }
 }

@@ -48,7 +48,7 @@ class GetNearlyStopsOriginDestiny extends Migration
 
 
 
-                CALL get_stops_nearly_point(latFrom, lngFrom, distance, 'tabla_origen');
+                CALL sp_get_nearly_stops_point(latFrom, lngFrom, distance, 'tabla_origen');
 
                 SET b = 0;
 
@@ -57,7 +57,7 @@ class GetNearlyStopsOriginDestiny extends Migration
                         FETCH stopsNearOrigin INTO v_id_stop, v_id_line, v_order, v_distance;
                         IF b = 0 THEN 
 
-                            CALL get_stops_nearly_point(latTo, lngTo, distance-(v_distance/100), 'tabla_destino');
+                            CALL sp_get_nearly_stops_point(latTo, lngTo, distance-(v_distance/100), 'tabla_destino');
                             OPEN stopsNearDestiny;
                                 read_loop: LOOP
 
@@ -126,6 +126,6 @@ class GetNearlyStopsOriginDestiny extends Migration
      */
     public function down()
     {
-        //
+        DB::unprepared("DROP PROCEDURE sp_get_nearly_stops_origin_destiny");
     }
 }

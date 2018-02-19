@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\Repositories\BusLinesRepository;
 use App\Repositories\BusStopsRepository;
+use App\Repositories\GeneralRepository;
 
 /**
  * Description of BusService
@@ -17,35 +18,90 @@ class BusService extends BaseService
     
     public function __construct(BusLinesRepository $busLine, BusStopsRepository $busStop) 
     {
+//        parent::__construct($generalRepository);
         $this->busLineRepository = $busLine;
         $this->busStopRepository = $busStop;
     }
   
-
+    
     public function getRoute($latFrom, $lngFrom, $latTo, $lngTo, $maxDistance = 800)
     {
-        $distance = distanceBetweenTerrainPoints($latFrom, $lngFrom, $latTo, $lngTo, "m");
-        if ($distance <= $maxDistance)
-        {
-            echo "Vaya caminando señor!!! Solo son: ".$distance;
-            exit;
-        }
-        
-        $stopsNearOrigin = $this->busStopRepository->getBusStopsNearby($latFrom, $lngFrom, $maxDistance);
-  
-        foreach ($stopsNearOrigin as $stop)
-        {
-            $stop->stopsOptions = $this->busStopRepository->getBusStopsNearby($latTo, $lngTo, $maxDistance-$stop->distance);
-            $stop->lines = $stop->lines;
-            
-            foreach ($stop->stopsOptions as $stopDestination)
+        try {
+            $result = [];
+            $optionRoute = $this->busLineRepository->getRouteOptions($latFrom, $lngFrom, $latTo, $lngTo, $maxDistance);
+
+            if ($optionRoute && count($optionRoute) > 0)
             {
-                $stopDestination->lines = $stopDestination->lines;
+                foreach($optionRoute as $option)
+                {
+                    if ($option->id_line_origin == $option->id_line_destiny) 
+                    {
+                        $line = $this->busLineRepository->find($option->id_line_origin);
+                        $result[] = array(
+                            "distance"  => $option->distance,
+                            "route"     => [
+                                [
+                                    'id'    => $line->id,
+                                    'line'  => $line->line,
+                                    'ramal' => $line->ramal
+                                ]
+                            ]
+                        );
+                    } else {
+                        $lineOrigin  = $this->busLineRepository->find($option->id_line_origin);
+                        $lineDestiny = $this->busLineRepository->find($option->id_line_destiny);
+                        
+                        $result[] = array(
+                            "distance"  => $option->distance,
+                            "route"     => [
+                                [
+                                    'id'    => $lineOrigin->id,
+                                    'line'  => $lineOrigin->line,
+                                    'ramal' => $lineOrigin->ramal
+                                ],
+                                [
+                                    'id'    => $lineDestiny->id,
+                                    'line'  => $lineDestiny->line,
+                                    'ramal' => $lineDestiny->ramal
+                                ]
+                            ]
+                        );
+                    }
+                }
             }
+            
+            return $result;
+            
+        } catch (Exception $e)
+        {
+            throw new \Symfony\Component\HttpKernel\Exception\HttpException;
         }
-        
-        return ($stopsNearOrigin);
     }
+
+//    public function getRoute($latFrom, $lngFrom, $latTo, $lngTo, $maxDistance = 800)
+//    {
+//        $distance = distanceBetweenTerrainPoints($latFrom, $lngFrom, $latTo, $lngTo, "m");
+//        if ($distance <= $maxDistance)
+//        {
+//            echo "Vaya caminando señor!!! Solo son: ".$distance;
+//            exit;
+//        }
+//        
+//        $stopsNearOrigin = $this->busStopRepository->getBusStopsNearby($latFrom, $lngFrom, $maxDistance);
+//  
+//        foreach ($stopsNearOrigin as $stop)
+//        {
+//            $stop->stopsOptions = $this->busStopRepository->getBusStopsNearby($latTo, $lngTo, $maxDistance-$stop->distance);
+//            $stop->lines = $stop->lines;
+//            
+//            foreach ($stop->stopsOptions as $stopDestination)
+//            {
+//                $stopDestination->lines = $stopDestination->lines;
+//            }
+//        }
+//        
+//        return ($stopsNearOrigin);
+//    }
 
 //debondi.app/api/route/?latFrom=-24.8092086&lngFrom=-65.38786479999999&latTo=-24.788584&lngTo=-65.4122110&maxDistance=1000    
 

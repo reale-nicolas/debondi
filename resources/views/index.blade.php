@@ -330,6 +330,13 @@
     <script>
         $( document ).ready(function() 
         {
+            
+            $("#btnCalcularRutaOptima").on('click', function(){
+                getRoutes('-24.8092086', '-65.38786479', '-24.781131', '-65.41745', '0.8');
+                
+            });
+            
+            
             $("#formContact").validate({
                 submitHandler: function(form) {
                     var subject = $("#txtSubject").val();

@@ -42,6 +42,61 @@ function sendContactsFormAjax(subject, message, email)
     });
 }
 
+function getRoutes(latFrom, lngFrom, latTo, lngTo, distance)
+{
+    $.ajax(
+    {
+        url: "http://debondi.test/api/route/?latFrom="+latFrom+"&lngFrom="+lngFrom+"&latTo="+latTo+"&lngTo="+lngTo+"&maxDistance="+distance,
+        type: 'GET',
+        async: true,
+        beforeSend: function() {
+//            $("#divComoLLegoForm").html("");
+        },
+        success: function (response) 
+        {
+            if (response.result === 'SUCCESS')
+            {
+                document.getElementById("divComoLLegoForm").innerHTML = '';
+                var option = response.data;
+                
+                var div = document.createElement('div');
+//                var ul = document.createElement('ul');
+                for(var i = 0; i < option.length; i++)
+                {
+                    var a = document.createElement("a");
+                    
+                    a.className = "w3-bar-item w3-button";
+                    a.href = '#';
+                    var li = document.createElement("li");
+                    for(var j = 0; j < option[i].route.length; j++)
+                    {
+                        a.id = "a-route-option-"+option[i].route[j].line+option[i].route[j].ramal.toLowerCase();
+                        var img = document.createElement("img");
+                        img.src = "http://debondi.test/images/"+option[i].route[j].line+option[i].route[j].ramal.toLowerCase()+".png";
+                        img.style = "width:30px";
+                        
+                        a.appendChild(img);
+                        
+                        
+//                        li.appendChild(img);
+                    }
+//                    ul.appendChild(li);
+                    div.appendChild(a);
+                }
+                
+                
+
+                document.getElementById("divComoLLegoForm").appendChild(div);
+            }
+            
+        },
+        complete: function() {
+//            $("#div-loading-corredor-"+corredorName+"-ramal-"+ramalName).toggleClass("w3-hide");
+//            $("#input-checkbox-corredor-"+corredorName+"-ramal-"+ramalName).toggleClass("w3-hide");
+        }
+    });
+}
+
 
 function getLineRouteAjax(corredorName, ramalName)
 {

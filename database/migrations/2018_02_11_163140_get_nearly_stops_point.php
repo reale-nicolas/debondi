@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class GetRouteSp extends Migration
+class GetNearlyStopsPoint extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class GetRouteSp extends Migration
     public function up()
     {
         DB::unprepared("
-            CREATE DEFINER=`homestead`@`%` PROCEDURE `get_stops_nearly_point`(
+            CREATE DEFINER=`homestead`@`%` PROCEDURE `sp_get_nearly_stops_point`(
                 IN latFrom FLOAT, 
                 IN lngFrom FLOAT,
                 IN distance VARCHAR(20),
@@ -153,6 +153,6 @@ class GetRouteSp extends Migration
      */
     public function down()
     {
-        //
+        DB::unprepared("DROP PROCEDURE sp_get_nearly_stops_point");
     }
 }
