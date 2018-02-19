@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Interfaces\RepositoryInterface;
 use Illuminate\Container\Container as App;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class BaseRepository
@@ -124,6 +125,23 @@ abstract class BaseRepository implements RepositoryInterface
             $repo = $repo->where($name, $value[$name]);
         }
         return $repo->get();
+    }
+    
+    
+    public function getRouteOptions($latFrom, $lngFrom, $latTo, $lngTo, $maxDistance = 500)
+    {
+        $result = DB::select(
+            'call sp_get_nearly_stops_origin_destiny(?,?,?,?,?)', 
+            array(
+                $latFrom, 
+                $lngFrom, 
+                $latTo, 
+                $lngTo, 
+                $maxDistance
+            )
+        ); 
+        
+        return $result;
     }
     
 }

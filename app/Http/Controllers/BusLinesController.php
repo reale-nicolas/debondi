@@ -38,7 +38,7 @@ class BusLinesController extends Controller
                 'lngFrom'       => 'required|numeric',
                 'latTo'         => 'required|numeric',
                 'lngTo'         => 'required|numeric',
-                'maxDistance'   => 'integer|max:1500'
+                'maxDistance'   => ''
             ]);
 
             if ($validator->fails())
@@ -57,6 +57,13 @@ class BusLinesController extends Controller
                     $request->lngTo,
                     $request->maxDistance
             );
+//            $result = $this->busService->getRoute(
+//                    $request->latFrom, 
+//                    $request->lngFrom,
+//                    $request->latTo, 
+//                    $request->lngTo,
+//                    $request->maxDistance
+//            );
 
             
             return response()->json([
