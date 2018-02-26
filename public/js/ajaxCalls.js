@@ -56,37 +56,37 @@ function getRoutes(latFrom, lngFrom, latTo, lngTo, distance)
         {
             if (response.result === 'SUCCESS')
             {
-                document.getElementById("divComoLLegoForm").innerHTML = '';
+                document.getElementById("divComoLLegoForm").classList.add("w3-hide");
                 var option = response.data;
                 
-                var div = document.createElement('div');
+                var divComoLlego = document.getElementById('divComoLLegoOptions');
+                divComoLlego.classList.remove("w3-hide");
+                divOptionRoutes = document.getElementById('divOptionRoutes');
+                divOptionRoutes.innerHTML = '';
+                var aExample = document.getElementById("a-route-option-example");
 //                var ul = document.createElement('ul');
                 for(var i = 0; i < option.length; i++)
                 {
-                    var a = document.createElement("a");
-                    
-                    a.className = "w3-bar-item w3-button";
+                    var a = aExample.cloneNode(true);
+                    a.classList.remove("w3-hide");
                     a.href = '#';
-                    var li = document.createElement("li");
                     for(var j = 0; j < option[i].route.length; j++)
                     {
+                        console.log("aca toy: "+option[i].route[j].line);
                         a.id = "a-route-option-"+option[i].route[j].line+option[i].route[j].ramal.toLowerCase();
                         var img = document.createElement("img");
                         img.src = "http://debondi.test/images/"+option[i].route[j].line+option[i].route[j].ramal.toLowerCase()+".png";
-                        img.style = "width:30px";
+                        img.style = "width:35px";
                         
                         a.appendChild(img);
-                        
-                        
-//                        li.appendChild(img);
                     }
 //                    ul.appendChild(li);
-                    div.appendChild(a);
+                    divOptionRoutes.appendChild(a);
                 }
                 
                 
 
-                document.getElementById("divComoLLegoForm").appendChild(div);
+//                document.getElementById("divComoLLegoForm").appendChild(div);
             }
             
         },

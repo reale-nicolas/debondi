@@ -5,13 +5,29 @@ var arrCorredores   = [];
 var arrStopsMarkers     = [];
 var arrRoutesPolylines  = [];
 
+var arrMarker                   = [];
+
+var arrAutocomplete             = [];
+var arrInput                    = [];
+
+var marker;
+
+var componentForm = {
+    street_number: 'short_name',
+    route: 'short_name',
+    locality: 'long_name',
+    administrative_area_level_1: 'short_name',
+    country: 'long_name',
+    postal_code: 'short_name'
+};
 
 function initializeApplication()
 {
-    initializeFroms();
+    initializeForms();
     initializeMap();
     initializeBusesStops();
     initializeAlerts();
+    initializeAutocompleteMenu();
 }
     
 function initializeAlerts()
@@ -27,8 +43,47 @@ function initializeAlerts()
     );
 }
 
+function initializeAutocompleteMenu()
+{
+    //Cuadricula en la que debe priorizar las busquedas google del autocompletado
+    var defaultBounds = new google.maps.LatLngBounds(
+        new google.maps.LatLng(-24.675531, -65.593153),
+        new google.maps.LatLng(-24.948735, -65.329512)
+    );
 
-function initializeFroms()    
+    //Seteamos la cuadricula, limitamos resultados a Argentina e indicamos que se buscaran direcciones
+    var options = {
+        types: ['address'],
+        bounds: defaultBounds,
+        componentRestrictions: {
+            country: 'ar'
+        }
+    };
+
+    arrInput['origen'] = document.getElementById('origen-input');
+    arrInput['destino'] = document.getElementById('destino-input');
+
+
+    //event fired when user selects direction from list direction.
+    //Here we have to make a marker into maps showing the point selected by user.
+    arrAutocomplete['origen'] = new google.maps.places.Autocomplete(arrInput['origen'], options);
+    //arrAutocomplete['origen'].bindTo('bounds', map);
+
+    google.maps.event.addListener(arrAutocomplete['origen'], 'place_changed', function ()
+    {
+        onPlaceListItemSelected(arrAutocomplete['origen'].getPlace(), "origen");
+    });
+
+
+    arrAutocomplete['destino'] = new google.maps.places.Autocomplete(arrInput['destino'], options);
+    google.maps.event.addListener(arrAutocomplete['destino'], 'place_changed', function ()
+    {
+        onPlaceListItemSelected(arrAutocomplete['destino'].getPlace(), "destino");
+    });
+}
+    
+    
+function initializeForms()    
 {
     var form = document.getElementById('formContact');
     form.addEventListener('submit', function(event) 
@@ -148,6 +203,62 @@ function initializeBusesStops()
 }
 
 
+function onPlaceListItemSelected(place, tipoDireccion)
+{
+//        var place = inputAddress.getPlace();
+    //Verificamos que la varibale tipoDireccion se encuentre seteada
+    //y que su valor pertenezca a los valores aceptados.
+    if ((tipoDireccion !== 'origen' && tipoDireccion !== 'destino') || (!place.geometry))
+    {
+        return null;
+    }
+    //Limpiamos los valores que puedan tener los campos de direccion, pues se deben rellenar 
+    //con la nueva direccion seleccionada.
+    unsetVaribales(tipoDireccion);
+
+    // If the place has a geometry, then present it on a map.
+    if (place.geometry.viewport)
+    {
+        map.fitBounds(place.geometry.viewport);
+    } else
+    {
+    map.setCenter(place.geometry.location);
+        map.setZoom(16);
+    }
+
+    marker = new google.maps.Marker(
+    {
+        map: map,
+        visible: true,
+        position: place.geometry.location,
+    });
+    arrMarker[tipoDireccion] = marker;
+    
+
+    // Get each component of the address from the place details
+    // and fill the corresponding field on the form.
+    for (var i = 0; i < place.address_components.length; i++)
+    {
+        var addressType = place.address_components[i].types[0];
+        if (componentForm[addressType])
+        {
+            var val = place.address_components[i][componentForm[addressType]];
+            document.getElementById(tipoDireccion + "-" + addressType).value = val;
+        }
+    }
+    document.getElementById(tipoDireccion + "-input").value = place.formatted_address;
+    document.getElementById(tipoDireccion + "-latitud").value = place.geometry.location.lat();
+    document.getElementById(tipoDireccion + "-longitud").value = place.geometry.location.lng();
+
+    document.getElementById(tipoDireccion + "-h4").innerHTML = 
+            document.getElementById(tipoDireccion + "-route").value +" "+
+            document.getElementById(tipoDireccion + "-street_number").value;
+    
+
+    
+    console.log(JSON.stringify(place));
+}
+
 function hideBusRouteOnMap(line, ramal)
 {
     var result = false;
@@ -243,7 +354,21 @@ function bindMarkerInfowindow(marker, message)
 }
 
 
+function unsetVaribales(tipoDireccion)
+{
+    if (typeof arrMarker[tipoDireccion] !== 'undefined' && arrMarker[tipoDireccion] !== null)
+        arrMarker[tipoDireccion].setVisible(false);
+    arrMarker[tipoDireccion] = null;
 
+    for (var component in componentForm)
+    {
+        document.getElementById(tipoDireccion + "-" + component).value = '';
+    }
+    document.getElementById(tipoDireccion + "-latitud").value = '';
+    document.getElementById(tipoDireccion + "-longitud").value = '';
+
+    return;
+}
 
 
 var isMobile = {

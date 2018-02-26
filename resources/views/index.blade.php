@@ -77,10 +77,47 @@
             <a href="javascript:void(0)" class="w3-bar-item w3-button w3-red w3-button w3-hover-black w3-left-align" 
                onclick="showHideMenuOption('divComoLLegoForm', new Array('divRecorridosLineaList','divConfiguracion'))"  
                style="border-top:2px solid;">
-                <i class="fa fa-search w3-margin-right"></i>
+                <i class="fa fa-c w3-margin-right"></i>
                 ¿Cómo llego?
             </a>
-            <div id="divComoLLegoForm" class="w3-show w3-animate-left">
+            <div id="divComoLLegoOptions" class="w3-hide w3-animate-left">
+                <div class="">
+                    <div class="w3-card w3-black w3-container w3-dark-grey">
+                        <span>Desde:</span>
+                        <h4 id="origen-h4"></h4>
+                        <span>Hasta:</span>
+                        <h4 id="destino-h4"></h4>
+                    </div>
+                    <div class="w3-bar w3-black w3-bar-block">
+                        <a href="#" class="w3-bar-item" id="aVolver">
+                            <i class="fa fa-arrow-left"></i>
+                            Volver
+                        </a>
+                    </div>
+                </div>
+                <a class="w3-bar-item w3-button w3-border-bottom w3-hide" href="#" id="a-route-option-example">
+                    <img src="" style="width: 35px;">
+                </a>
+                <div id="divOptionRoutes"></div>
+<!--                <a class="w3-bar-item w3-button w3-border-bottom" href="#" id="a-route-option-2b">
+                    <img src="http://debondi.test/images/2b.png" style="width: 35px;">
+                </a>
+                <a class="w3-bar-item w3-button w3-border-bottom" href="#" id="a-route-option-3b">
+                    <img src="http://debondi.test/images/3b.png" style="width: 35px;">
+                </a>
+                 <a class="w3-bar-item w3-button w3-border-bottom" href="#" id="a-route-option-3a">
+                    <img src="http://debondi.test/images/3a.png" style="width: 35px;">
+                </a>
+                 <a class="w3-bar-item w3-button w3-border-bottom" href="#" id="a-route-option-6b2b">
+                    <img src="http://debondi.test/images/6b.png" style="width: 35px;">
+                    <i class="fa fa-angle-double-right w3-margin-right w3-margin-left"></i>
+                    <img src="http://debondi.test/images/2b.png" style="width: 35px;">
+                </a>
+                <a class="w3-bar-item w3-button w3-border-bottom" href="#" id="a-route-option-5b">
+                    <img src="http://debondi.test/images/5b.png" style="width: 35px;">
+                </a>-->
+            </div>
+            <div id="divComoLLegoForm" class="w3-animate-left">
                 <div class="w3-container">
                     <br>   
                     <form action="#" class="">
@@ -332,8 +369,20 @@
         {
             
             $("#btnCalcularRutaOptima").on('click', function(){
-                getRoutes('-24.8092086', '-65.38786479', '-24.781131', '-65.41745', '0.8');
+                var origen_latitud      = $("#origen-latitud").val();
+                var origen_longitud     = $("#origen-longitud").val();
+                var destino_latitud     = $("#destino-latitud").val(); 
+                var destino_longitud    = $("#destino-longitud").val(); 
+                var distancia           = parseInt($("#distancia-input").val())/100;
+                getRoutes(origen_latitud, origen_longitud, destino_latitud, destino_longitud, distancia);
+//                showHideMenuOption("divComoLLegoOptions", new Array('divComoLLegoForm'));
+//                getRoutes('-24.8092086', '-65.38786479', '-24.781131', '-65.41745', '0.8');
+//                $("#divComoLLegoOptions").toggleClass("w3-")
                 
+            });
+            
+            $("#aVolver").on("click", function(){
+                showHideMenuOption("divComoLLegoForm", new Array('divComoLLegoOptions'));
             });
             
             

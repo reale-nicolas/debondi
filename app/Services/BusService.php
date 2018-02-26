@@ -39,11 +39,14 @@ class BusService extends BaseService
                         $line = $this->busLineRepository->find($option->id_line_origin);
                         $result[] = array(
                             "distance"  => $option->distance,
+                            "stop_from" => $option->id_stop_origin,
+                            "stop_to"   => $option->id_stop_destiny,
                             "route"     => [
                                 [
                                     'id'    => $line->id,
                                     'line'  => $line->line,
-                                    'ramal' => $line->ramal
+                                    'ramal' => $line->ramal,
+                                    'zone'  => $line->zone
                                 ]
                             ]
                         );
@@ -53,6 +56,8 @@ class BusService extends BaseService
                         
                         $result[] = array(
                             "distance"  => $option->distance,
+                            "stop_from" => $option->id_stop_origin,
+                            "stop_to"   => $option->id_stop_destiny,
                             "route"     => [
                                 [
                                     'id'    => $lineOrigin->id,
