@@ -42,61 +42,6 @@ function sendContactsFormAjax(subject, message, email)
     });
 }
 
-function getRoutes(latFrom, lngFrom, latTo, lngTo, distance)
-{
-    $.ajax(
-    {
-        url: "http://debondi.test/api/route/?latFrom="+latFrom+"&lngFrom="+lngFrom+"&latTo="+latTo+"&lngTo="+lngTo+"&maxDistance="+distance,
-        type: 'GET',
-        async: true,
-        beforeSend: function() {
-//            $("#divComoLLegoForm").html("");
-        },
-        success: function (response) 
-        {
-            if (response.result === 'SUCCESS')
-            {
-                document.getElementById("divComoLLegoForm").classList.add("w3-hide");
-                var option = response.data;
-                
-                var divComoLlego = document.getElementById('divComoLLegoOptions');
-                divComoLlego.classList.remove("w3-hide");
-                divOptionRoutes = document.getElementById('divOptionRoutes');
-                divOptionRoutes.innerHTML = '';
-                var aExample = document.getElementById("a-route-option-example");
-//                var ul = document.createElement('ul');
-                for(var i = 0; i < option.length; i++)
-                {
-                    var a = aExample.cloneNode(true);
-                    a.classList.remove("w3-hide");
-                    a.href = '#';
-                    for(var j = 0; j < option[i].route.length; j++)
-                    {
-                        console.log("aca toy: "+option[i].route[j].line);
-                        a.id = "a-route-option-"+option[i].route[j].line+option[i].route[j].ramal.toLowerCase();
-                        var img = document.createElement("img");
-                        img.src = "http://debondi.test/images/"+option[i].route[j].line+option[i].route[j].ramal.toLowerCase()+".png";
-                        img.style = "width:35px";
-                        
-                        a.appendChild(img);
-                    }
-//                    ul.appendChild(li);
-                    divOptionRoutes.appendChild(a);
-                }
-                
-                
-
-//                document.getElementById("divComoLLegoForm").appendChild(div);
-            }
-            
-        },
-        complete: function() {
-//            $("#div-loading-corredor-"+corredorName+"-ramal-"+ramalName).toggleClass("w3-hide");
-//            $("#input-checkbox-corredor-"+corredorName+"-ramal-"+ramalName).toggleClass("w3-hide");
-        }
-    });
-}
-
 
 function getLineRouteAjax(corredorName, ramalName)
 {

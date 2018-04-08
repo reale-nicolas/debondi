@@ -128,7 +128,7 @@ abstract class BaseRepository implements RepositoryInterface
     }
     
     
-    public function getRouteOptions($latFrom, $lngFrom, $latTo, $lngTo, $maxDistance = 500)
+    public function getRouteOptions($latFrom, $lngFrom, $latTo, $lngTo, $maxDistance = 0.8)
     {
         $result = DB::select(
             'call sp_get_nearly_stops_origin_destiny(?,?,?,?,?)', 

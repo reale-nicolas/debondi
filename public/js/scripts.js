@@ -25,7 +25,7 @@ function initializeApplication()
 {
     initializeForms();
     initializeMap();
-    initializeBusesStops();
+//    initializeBusesStops();
     initializeAlerts();
     initializeAutocompleteMenu();
 }
@@ -113,12 +113,17 @@ function initializeMap()
     });
     
     infowindow = new google.maps.InfoWindow();
+    marker = new google.maps.Marker(
+    {
+        map: map
+    });
+    
     
     if(  isMobile.any() !== null ) 
     {
         google.maps.event.addListener(map, 'dblclick', function(mouseEvent) 
         {
-//            displayMenuOptionOnMap(mouseEvent.latLng);
+            displayMenuOptionOnMap(mouseEvent.latLng);
             mouseEvent.preventDefault();
             return;
         });
@@ -127,7 +132,7 @@ function initializeMap()
     {
         map.addListener('rightclick', function(mouseEvent) 
         {
-//            displayMenuOptionOnMap(mouseEvent.latLng);
+            displayMenuOptionOnMap(mouseEvent.latLng);
         });
     }
 }
@@ -251,8 +256,8 @@ function onPlaceListItemSelected(place, tipoDireccion)
     document.getElementById(tipoDireccion + "-longitud").value = place.geometry.location.lng();
 
     document.getElementById(tipoDireccion + "-h4").innerHTML = 
-            document.getElementById(tipoDireccion + "-route").value +" "+
-            document.getElementById(tipoDireccion + "-street_number").value;
+    document.getElementById(tipoDireccion + "-route").value +" "+
+    document.getElementById(tipoDireccion + "-street_number").value;
     
 
     
@@ -343,7 +348,59 @@ function showBusRouteOnMap(line, ramal)
 }
 
 
+function displayMenuOptionOnMap(latlng)
+{
+    marker.setPosition(latlng);
+    marker.setVisible(true);
 
+    var geocoder = new google.maps.Geocoder;
+    geocoder.geocode({'location': latlng}, function(results, status) 
+    {
+        if (status === 'OK') 
+        {
+            if (results[0]) 
+            {
+                console.log(results[0]);
+                var street = getAddressComponenet(results[0], "route");
+                var door_number = getAddressComponenet(results[0], "street_number");
+                var locality = getAddressComponenet(results[0], "administrative_area_level_2");
+                var province = getAddressComponenet(results[0], "administrative_area_level_1");
+
+                var placeId = results[0].place_id;
+
+                if (street === "Unnamed Road") {
+                    street = "Calle S/N";
+                }
+                if (door_number === null) {
+                    door_number = "S/N";
+                }
+                if (locality === null) {
+                    locality = "";
+                }
+                if (province === null) {
+                    province = "";
+                }
+
+                infowindow.setContent('\
+                    <div class="" style="min-width:200px">'+
+                        '<strong>'+
+                            street +' '+ door_number +' - ' +
+                            locality +
+                        '</strong><br>' +
+                        results[0].geometry.location + '<br><br>' +
+                        '<div class="col-xs-6 text-left"><a href="#" role="button" onclick="setOrigenDestino(\''+placeId+'\', \'origen\')">Desde aqui</a></div>'+
+                        '<div class="text-right"><a href="#" role="button" onclick="setOrigenDestino(\''+placeId+'\', \'destino\')">Hasta aqui</a></div>'+
+                    '</div>'
+                );
+                infowindow.open(map, marker);
+            } else {
+                window.alert('No results found');
+            }
+        } else {
+            window.alert('Geocoder failed due to: ' + status);
+        }
+    });
+}
 
 function bindMarkerInfowindow(marker, message) 
 {
@@ -370,6 +427,34 @@ function unsetVaribales(tipoDireccion)
     return;
 }
 
+
+function setOrigenDestino(placeId, origenDestino)
+{
+    var request = {
+        placeId: placeId
+    };
+    var service = new google.maps.places.PlacesService(map);
+    service.getDetails(request, function(place, status){
+        infowindow.close();
+        onPlaceListItemSelected(place, origenDestino);
+    });
+
+}
+    
+
+function getAddressComponenet(address, component)
+{
+    for (var i=0; i<address.address_components.length; i++) {
+        for (var j=0; j<address.address_components[i].types.length; j++) {
+            console.log(address.address_components[i].types[j]);
+            if (address.address_components[i].types[j] === component) {
+                return address.address_components[i].long_name;
+            }
+        }
+    }
+    return null;
+}
+    
 
 var isMobile = {
     Android: function() {

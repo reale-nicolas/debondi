@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\BusService;
+use Validator;
+use function response;
 
 class BusLinesWebController extends Controller
 {
@@ -98,6 +100,47 @@ class BusLinesWebController extends Controller
         ]);
     }
     
+    
+    
+    public function getRouteFromStopToStopByIdLines(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'stop_from' => 'integer|required',
+            'stop_to'   => 'integer|required',
+            'id_lines'  => 'string|required'
+        ]);
+
+        if ($validator->fails())
+        {
+            return response()->json([
+                'result'    => 'ERROR',
+                'detail'    => 'Differents errors were found in the input data',
+                'fields'    => $validator->errors()
+            ]);
+        }
+
+        $arrIdLines = array_filter(explode('-', $request->id_lines));
+        foreach ($arrIdLines as $idLine) {
+            $arrLines[] = $this->busService->getLineById($idLine)->toArray();
+        }
+        
+        if (!count($arrLines)) 
+        {
+            return response()->json([
+                'result'    => 'SUCCESS',
+                'detail'    => 'We couldn\'t find records with your criteria',
+                'dataset'   => '0',
+                'data'      => null
+            ]);
+        }
+        
+        return response()->json([
+            'result'    => 'SUCCESS',
+            'detail'    => '',
+            'dataset'   => count($arrLines),
+            'data'      => $arrLines
+        ]);
+    }
     
     
     public function getBusStopsNearby(Request $request)

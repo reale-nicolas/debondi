@@ -34,19 +34,19 @@ class BusService extends BaseService
             {
                 foreach($optionRoute as $option)
                 {
-                    if ($option->id_line_origin == $option->id_line_destiny) 
+                    if ($option->id_lines_origin == $option->id_lines_destiny) 
                     {
-                        $line = $this->busLineRepository->find($option->id_line_origin);
+//                        $line = $this->busLineRepository->find($option->id_line_origin);
                         $result[] = array(
-                            "distance"  => $option->distance,
+                            "distance"  => $option->distance_origin+$option->distance_destiny,
                             "stop_from" => $option->id_stop_origin,
                             "stop_to"   => $option->id_stop_destiny,
                             "route"     => [
                                 [
-                                    'id'    => $line->id,
-                                    'line'  => $line->line,
-                                    'ramal' => $line->ramal,
-                                    'zone'  => $line->zone
+                                    'id'    => $option->id_lines_origin,
+                                    'line'  => $option->line,
+                                    'ramal' => $option->ramal,
+                                    'zone'  => $option->txt_zones
                                 ]
                             ]
                         );

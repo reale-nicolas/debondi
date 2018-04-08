@@ -57,13 +57,6 @@ class BusLinesController extends Controller
                     $request->lngTo,
                     $request->maxDistance
             );
-//            $result = $this->busService->getRoute(
-//                    $request->latFrom, 
-//                    $request->lngFrom,
-//                    $request->latTo, 
-//                    $request->lngTo,
-//                    $request->maxDistance
-//            );
 
             
             return response()->json([
@@ -185,7 +178,6 @@ class BusLinesController extends Controller
             'data'      => $result
         ]);
     }
-    
     
     
     public function getBusStopsNearby(Request $request)

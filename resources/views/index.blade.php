@@ -55,6 +55,11 @@
     </style>
     <body onload="initializeApplication()">
         
+        <div class="w3-sidebar w3-bar-block w3-cllapse w3-animate-left w3-card-2 w3-hide" 
+             style="z-index:1000;width:300px;position: relative; 
+             background: rgba(0, 0, 0, 0.3)" id="divMenuLoading">
+                 
+        </div>
         <!-- Side Navigation -->
         <nav class="w3-sidebar w3-bar-block w3-collapse w3-white w3-animate-left w3-card-2" 
              style="z-index:3;width:300px;" id="mySidebar">
@@ -96,7 +101,7 @@
                     </div>
                 </div>
                 <a class="w3-bar-item w3-button w3-border-bottom w3-hide" href="#" id="a-route-option-example">
-                    <img src="" style="width: 35px;">
+                    
                 </a>
                 <div id="divOptionRoutes"></div>
 <!--                <a class="w3-bar-item w3-button w3-border-bottom" href="#" id="a-route-option-2b">
@@ -246,7 +251,7 @@
                 <div id="div-config-idioma" class="w3-hide">
                     <ul id="ul-config-idioma" class="w3-ul w3-right" style="width:90%">
                         <li id="li-config-idioma-espanol" class="w3-padding-16"
-                            style="cursor: pointer; background-color: rgb(255, 255, 255);"">
+                            style="cursor: pointer; background-color: rgb(255, 255, 255);">
                             <span class="w3-button w3-white w3-right" style="padding: 0px;height: 20px;">
                                 <div id="div-loading-config-idioma-espanol" class="loader-menu-option w3-hide" 
                                     style="width:20px;height:20px;">
@@ -367,19 +372,89 @@
     <script>
         $( document ).ready(function() 
         {
-            
             $("#btnCalcularRutaOptima").on('click', function(){
                 var origen_latitud      = $("#origen-latitud").val();
                 var origen_longitud     = $("#origen-longitud").val();
                 var destino_latitud     = $("#destino-latitud").val(); 
                 var destino_longitud    = $("#destino-longitud").val(); 
-                var distancia           = parseInt($("#distancia-input").val())/100;
-                getRoutes(origen_latitud, origen_longitud, destino_latitud, destino_longitud, distancia);
+                var distancia           = parseInt($("#distancia-input").val())/1000;
+                
+                $.ajax(
+                {
+                    url: "http://debondi.test/api/route/?latFrom="+origen_latitud+"&lngFrom="+origen_longitud+"&latTo="+destino_latitud+"&lngTo="+destino_longitud+"&maxDistance="+distancia,
+                    type: 'GET',
+                    async: true,
+                    dataType: 'JSON',
+                    beforeSend: function() {
+//                        $("#divMenuLoading").show();
+                        showHideMenuOption('divMenuLoading', null);
+//                        showHideMenuOption('divComoLLegoOptions', new Array('divComoLLegoForm'));
+                    },
+                    success: function (response) 
+                    {
+                        if (response.result === 'SUCCESS')
+                        {
+                            showHideMenuOption('divComoLLegoOptions', new Array("divComoLLegoForm"));
+                            
+                            var option = response.data;
+
+                            var divComoLlego = document.getElementById('divComoLLegoOptions');
+                            divComoLlego.classList.remove("w3-hide");
+                            divOptionRoutes = document.getElementById('divOptionRoutes');
+                            divOptionRoutes.innerHTML = '';
+                            var aExample = document.getElementById("a-route-option-example");
+                            
+                            for(var i = 0; i < option.length; i++)
+                            {
+                                var a = aExample.cloneNode(true);
+                                a.classList.remove("w3-hide");
+                                a.classList.add("a-route-option");
+                                a.href = '#';
+                                
+                                
+                                var lines = '';
+                                for(var j = 0; j < option[i].route.length; j++)
+                                {
+                                    lines = lines + option[i].route[j].id + '-';
+                                    console.log("aca toy: "+option[i].route[j].line+option[i].route[j].ramal);
+                                    a.id = "a-route-option-"+option[i].route[j].line+option[i].route[j].ramal.toLowerCase();
+                                    var imgRamal = document.createElement("img");
+                                    imgRamal.src = "http://debondi.test/images/"+option[i].route[j].line+option[i].route[j].ramal.toLowerCase()+".png";
+                                    imgRamal.style = "width:35px";
+
+                                    a.appendChild(imgRamal);
+                                }
+//                                a.setAttribute("href", "?stop-from="+option[i].stop_from+"&stop-to="+option[i].stop_to+"&id-lines="+lines);
+                                a.setAttribute("href","#");
+                                a.setAttribute("id-lines", lines);
+                                a.setAttribute("stop-from",  option[i].stop_from);
+                                a.setAttribute("stop-to",  option[i].stop_to);
+                                divOptionRoutes.appendChild(a);
+                            }
+                            
+                            attachEventToMenuOptionRoute();
+                        }
+
+                    },
+                    complete: function() {
+                        showHideMenuOption(null, new Array('divMenuLoading'));
+//                        $("#divMenuLoading").hide();
+            //            $("#div-loading-corredor-"+corredorName+"-ramal-"+ramalName).toggleClass("w3-hide");
+            //            $("#input-checkbox-corredor-"+corredorName+"-ramal-"+ramalName).toggleClass("w3-hide");
+                    }
+                    
+                    
+                });
+    
+//                getRoutes(origen_latitud, origen_longitud, destino_latitud, destino_longitud, distancia);
 //                showHideMenuOption("divComoLLegoOptions", new Array('divComoLLegoForm'));
 //                getRoutes('-24.8092086', '-65.38786479', '-24.781131', '-65.41745', '0.8');
 //                $("#divComoLLegoOptions").toggleClass("w3-")
+                return false;
                 
             });
+            
+            
             
             $("#aVolver").on("click", function(){
                 showHideMenuOption("divComoLLegoForm", new Array('divComoLLegoOptions'));
@@ -417,6 +492,37 @@
         });
 //            );
             
+    function attachEventToMenuOptionRoute()
+    {
+        $(".a-route-option").on("click", function()
+        {
+            var stopFrom = $(this).attr("stop-from");
+            var stopTo   = $(this).attr("stop-to");
+            var idLines  = $(this).attr("id-lines");
+            $.ajax(
+            {
+                url: "{{ route('route.get.fromStopToStop') }}?stop_from="+stopFrom+"&stop_to="+stopTo+"&id_lines="+idLines,
+                type: 'GET',
+                dataType: 'JSON',
+                beforeSend: function() {
+
+                },
+                success: function (response) 
+                {
+                    if (response.result === 'SUCCESS')
+                    {
+
+                    }
+
+                },
+                complete: function() {
+
+                }
+            });
+
+            return false;
+        });
+    }
     </script>
     </body>
 </html>

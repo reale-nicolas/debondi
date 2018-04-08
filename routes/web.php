@@ -12,3 +12,5 @@
 */
 
 Route::get("/",      "BusLinesWebController@showIndex");
+
+Route::get("/routeFromStopToStop", ["as" => "route.get.fromStopToStop", "uses" => "BusLinesWebController@getRouteFromStopToStopByIdLines"]);
