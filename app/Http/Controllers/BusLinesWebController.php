@@ -122,6 +122,7 @@ class BusLinesWebController extends Controller
         $arrIdLines = array_filter(explode('-', $request->id_lines));
         foreach ($arrIdLines as $idLine) {
             $arrLines[] = $this->busService->getLineById($idLine)->toArray();
+            
         }
         
         if (!count($arrLines)) 
